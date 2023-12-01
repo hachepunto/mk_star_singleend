@@ -1,0 +1,7 @@
+#!/bin/bash
+
+find -L data \
+	-name '*trimmed.fastq.gz' \
+| sed -r \
+	-e 's/^data/results/g' \
+	-e 's/_trimmed.fastq.gz/_Aligned.sortedByCoord.out.bam/g'
