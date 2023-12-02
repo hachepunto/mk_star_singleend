@@ -1,18 +1,18 @@
 <config.mk
 
 'results/%Aligned.sortedByCoord.out.bam': 'data/%trimmed.fastq.gz'
+	set -x
 	DIR=`dirname $target`
 	mkdir -p $DIR
-	set -x
 	STAR \
 		--runThreadN $THREADS \
 		--genomeDir $GENOMEDIR \
 		--sjdbGTFfile $GTF \
 		--readFilesCommand $COMPRESS \
 		--readFilesIn $prereq \
-		--outFileNamePrefix $DIR"/"$stem\
+		--outFileNamePrefix $DIR"/build_"$stem\
 		--outSAMtype BAM SortedByCoordinate \
-	&& mv $target'.build' $target
+	&& rename 's#build_##' $DIR"/build_"$stem*
 
 
 clean:VE:
